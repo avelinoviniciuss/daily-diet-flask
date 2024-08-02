@@ -31,5 +31,47 @@ def create_meal():
     return make_response(jsonify({'message': 'Missing parameters'}), 400)
 
 
+@app.route('/meal', methods=['GET'])
+def get_meals():
+    """
+    This function gets all meals.
+    Returns:
+        Response: List of meals.
+    """
+
+    meals = Meal.query.all()
+    meals_list = []
+    for meal in meals:
+        meals_list.append({
+            'id': meal.id,
+            'name': meal.name,
+            'description': meal.description,
+            'datetime': meal.datetime,
+            'is_in_diet': meal.is_in_diet
+        })
+    return make_response(jsonify(meals_list))
+
+
+@app.route('/meal/<int:meal_id>', methods=['PUT'])
+def update_meal(meal_id):
+    """
+    This function updates a meal.
+    Args:
+        meal_id (int): The meal id.
+    Returns:
+        Response: Message with the updated meal.
+    """
+
+    meal = Meal.query.get(meal_id)
+    if meal:
+        data = request.get_json()
+        meal.name = data.get('name', meal.name)
+        meal.description = data.get('description', meal.description)
+        meal.datetime = data.get('date_hour', meal.datetime)
+        meal.is_in_diet = data.get('is_in_diet', meal.is_in_diet)
+        db.session.commit()
+        return make_response(jsonify({'message': 'Meal updated successfully'}))
+    return make_response(jsonify({'message': 'Meal not found'}), 404)
+        
 if __name__ == '__main__':
     app.run(debug=True)
