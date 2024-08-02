@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "dde230f6-31a5-48bf-ac1b-2fa28fe7e2f2",
+		"name": "Diet Meal API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16169659"
+	},
+	"item": [
+		{
+			"name": "Create Meal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Feijão tropeiro 2\",\n    \"description\": \"Teste feijão tropeiro\",\n    \"date_hour\": \"Dia 2 - 07:00\",\n    \"is_in_diet\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/meal",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"meal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update meal",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Feijoada\",\n    \"description\": \"Feijoada Teste\",\n    \"date_hour\": \"Dia 3 - 09:00\",\n    \"is_in_diet\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/meal/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"meal",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all meals",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get meal by ID",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Delete meal",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Feijoada\",\n    \"description\": \"Feijoada Teste\",\n    \"date_hour\": \"Dia 3 - 09:00\",\n    \"is_in_diet\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/meal/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"meal",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
