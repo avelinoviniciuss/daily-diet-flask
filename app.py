@@ -51,6 +51,27 @@ def get_meals():
         })
     return make_response(jsonify(meals_list))
 
+@app.route('/meal/<int:meal_id>', methods=['GET'])
+def get_meal_by_id(meal_id):
+    """
+    This function gets a meal by id.
+    Args:
+        meal_id (int): The meal id.
+    Returns:
+        Response: The meal.
+    """
+
+    meal = Meal.query.get(meal_id)
+    if meal:
+        return make_response(jsonify({
+            'id': meal.id,
+            'name': meal.name,
+            'description': meal.description,
+            'datetime': meal.datetime,
+            'is_in_diet': meal.is_in_diet
+        }))
+    return make_response(jsonify({'message': 'Meal not found'}), 404)
+
 
 @app.route('/meal/<int:meal_id>', methods=['PUT'])
 def update_meal(meal_id):
@@ -73,5 +94,24 @@ def update_meal(meal_id):
         return make_response(jsonify({'message': 'Meal updated successfully'}))
     return make_response(jsonify({'message': 'Meal not found'}), 404)
         
+
+@app.route('/meal/<int:meal_id>', methods=['DELETE'])
+def delete_meal(meal_id):
+    """
+    This function deletes a meal.
+    Args:
+        meal_id (int): The meal id.
+    Returns:
+        Response: Message with the deleted meal.
+    """
+
+    meal = Meal.query.get(meal_id)
+    if meal:
+        db.session.delete(meal)
+        db.session.commit()
+        return make_response(jsonify({'message': 'Meal deleted successfully'}))
+    return make_response(jsonify({'message': 'Meal not found'}), 404)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
